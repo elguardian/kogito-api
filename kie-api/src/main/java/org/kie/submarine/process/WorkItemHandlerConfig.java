@@ -13,10 +13,15 @@
  * limitations under the License.
  */
 
-package org.kie.submarine.rules.impl;
+package org.kie.submarine.process;
 
-import org.kie.submarine.rules.RuleUnit;
+import java.util.Collection;
 
-public abstract class AbstractRuleUnit<T> implements RuleUnit<T> {
+import org.kie.api.runtime.process.WorkItemHandler;
 
+public interface WorkItemHandlerConfig {
+
+    WorkItemHandler forName(String name);
+
+    Collection<String> names();
 }

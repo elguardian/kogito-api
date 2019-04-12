@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-package org.kie.submarine.rules.impl;
+package org.kie.submarine;
 
-import org.kie.submarine.rules.RuleUnit;
+import org.kie.submarine.process.ProcessConfig;
 
-public abstract class AbstractRuleUnit<T> implements RuleUnit<T> {
-
+public interface Config {
+    ProcessConfig process();
 }

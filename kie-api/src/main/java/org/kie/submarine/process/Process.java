@@ -13,10 +13,13 @@
  * limitations under the License.
  */
 
-package org.kie.submarine.rules.impl;
+package org.kie.submarine.process;
 
-import org.kie.submarine.rules.RuleUnit;
+public interface Process<T> {
 
-public abstract class AbstractRuleUnit<T> implements RuleUnit<T> {
+    ProcessInstance<T> createInstance(T workingMemory);
 
+    ProcessInstances<T> instances();
+
+    <S> void send(Signal<S> sig);
 }

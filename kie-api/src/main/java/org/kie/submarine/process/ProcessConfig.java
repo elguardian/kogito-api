@@ -13,10 +13,8 @@
  * limitations under the License.
  */
 
-package org.kie.submarine.rules.impl;
+package org.kie.submarine.process;
 
-import org.kie.submarine.rules.RuleUnit;
-
-public abstract class AbstractRuleUnit<T> implements RuleUnit<T> {
-
+public interface ProcessConfig {
+    WorkItemHandlerConfig workItemHandlers();
 }

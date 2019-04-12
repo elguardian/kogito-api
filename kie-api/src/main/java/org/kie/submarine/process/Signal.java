@@ -13,10 +13,11 @@
  * limitations under the License.
  */
 
-package org.kie.submarine.rules.impl;
+package org.kie.submarine.process;
 
-import org.kie.submarine.rules.RuleUnit;
+public interface Signal<T> {
 
-public abstract class AbstractRuleUnit<T> implements RuleUnit<T> {
+    String channel();
 
+    T payload();
 }

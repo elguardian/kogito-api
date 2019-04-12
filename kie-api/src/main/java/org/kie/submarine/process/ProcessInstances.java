@@ -13,10 +13,14 @@
  * limitations under the License.
  */
 
-package org.kie.submarine.rules.impl;
+package org.kie.submarine.process;
 
-import org.kie.submarine.rules.RuleUnit;
+import java.util.Collection;
+import java.util.Optional;
 
-public abstract class AbstractRuleUnit<T> implements RuleUnit<T> {
+public interface ProcessInstances<T> {
 
+    Optional<? extends ProcessInstance<T>> findById(long i);
+
+    Collection<? extends ProcessInstance<T>> values();
 }
