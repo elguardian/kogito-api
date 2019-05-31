@@ -13,14 +13,16 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.process;
+package org.kie.kogito.signal;
 
-import org.kie.kogito.signal.SignalManagerHub;
 
-public interface ProcessConfig {
-    WorkItemHandlerConfig workItemHandlers();
+public interface SignalManagerHub {
+
+    void publish(String type, Object signalData);
     
-    ProcessEventListenerConfig processEventListeners();
+    void publishTargeting(long id, String type, Object signalData);
     
-    SignalManagerHub signalManagerHub();
+    void subscribe(String type, SignalManager signalManager);
+    
+    void unsubscribe(String type, SignalManager signalManager);
 }
