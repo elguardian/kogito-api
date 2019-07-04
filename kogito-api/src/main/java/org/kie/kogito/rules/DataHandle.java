@@ -14,20 +14,7 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.rules.impl;
+package org.kie.kogito.rules;
 
-import org.kie.kogito.rules.DataSource;
-import org.kie.kogito.rules.DataStream;
-import org.kie.kogito.rules.RuleUnitMemory;
-
-public class SessionMemory implements RuleUnitMemory {
-    private final DataStream<Object> dataSource = DataSource.createStream();
-
-    public DataSource<Object> getDataSource() {
-        return dataSource;
-    }
-
-    public void add(Object obj) {
-        dataSource.append( obj );
-    }
+public interface DataHandle {
 }
