@@ -15,19 +15,13 @@
 
 package org.kie.kogito.process;
 
-import org.kie.kogito.Model;
-
-public interface Process<T> {
-
-    ProcessInstance<T> createInstance(T workingMemory);
-
-    ProcessInstances<T> instances();
-
-    <S> void send(Signal<S> sig);
+public interface MutableProcessInstances<T> extends ProcessInstances<T> {
     
-    T createModel();
-
-    ProcessInstance<? extends Model> createInstance(Model m);
+    void update(long id, ProcessInstance<T> instance);
     
-    String id();
+    void remove(long id);
+    
+    default boolean isActive(ProcessInstance<T> instance) {
+        return instance.status() == org.kie.api.runtime.process.ProcessInstance.STATE_ACTIVE;        
+    }
 }

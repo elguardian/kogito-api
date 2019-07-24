@@ -15,19 +15,8 @@
 
 package org.kie.kogito.process;
 
-import org.kie.kogito.Model;
 
-public interface Process<T> {
+public interface ProcessInstancesFactory {
 
-    ProcessInstance<T> createInstance(T workingMemory);
-
-    ProcessInstances<T> instances();
-
-    <S> void send(Signal<S> sig);
-    
-    T createModel();
-
-    ProcessInstance<? extends Model> createInstance(Model m);
-    
-    String id();
+    MutableProcessInstances<?> createProcessInstances(Process<?> process);
 }
