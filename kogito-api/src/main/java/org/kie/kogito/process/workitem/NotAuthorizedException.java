@@ -13,23 +13,16 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.process;
+package org.kie.kogito.process.workitem;
 
-import java.util.Map;
+/**
+ * Thrown when there is security violation, usually due to policy enforcement
+ *
+ */
+public class NotAuthorizedException extends RuntimeException {
+    private static final long serialVersionUID = -40827773509603874L;
 
-public interface WorkItem {
-
-    String getId();
-
-    String getName();
-    
-    int getState();
-    
-    String getPhase();
-    
-    String getPhaseStatus();
-    
-    Map<String, Object> getParameters();
-    
-    Map<String, Object> getResults();
+    public NotAuthorizedException(String message) {
+        super(message);
+    }
 }

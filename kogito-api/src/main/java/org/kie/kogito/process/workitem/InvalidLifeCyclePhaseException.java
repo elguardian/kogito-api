@@ -13,23 +13,18 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.process;
+package org.kie.kogito.process.workitem;
 
-import java.util.Map;
+/**
+ * Thrown when there is no such life cycle phase
+ *
+ */
+public class InvalidLifeCyclePhaseException extends RuntimeException {
 
-public interface WorkItem {
+    private static final long serialVersionUID = -40827773509603874L;
 
-    String getId();
+    public InvalidLifeCyclePhaseException(String message) {
+        super(message);
+    }
 
-    String getName();
-    
-    int getState();
-    
-    String getPhase();
-    
-    String getPhaseStatus();
-    
-    Map<String, Object> getParameters();
-    
-    Map<String, Object> getResults();
 }
