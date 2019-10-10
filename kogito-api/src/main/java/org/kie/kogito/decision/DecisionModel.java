@@ -26,4 +26,6 @@ public interface DecisionModel {
 
     DMNResult evaluateAll(DMNContext context);
 
+    DMNResult evaluateDecisionService(DMNContext context, String decisionServiceName);
+
 }
