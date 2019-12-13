@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.rules.impl;
+package org.kie.internal.ruleunit;
 
-import org.kie.kogito.rules.RuleUnit;
+import java.util.List;
 
-public abstract class SessionUnit implements RuleUnit<SessionData> {
+import org.kie.api.pmml.PMML4Result;
+import org.kie.api.pmml.PMMLRequestData;
+import org.kie.api.runtime.Context;
 
-    public void evaluate(SessionData data) {
-        createInstance(data).fire();
-    }
+public interface ApplyPmmlModelCommandExecutor {
+    PMML4Result execute( Context context, PMMLRequestData requestData, List<Object> complexInputObjects, String packageName, boolean isMining );
 }
