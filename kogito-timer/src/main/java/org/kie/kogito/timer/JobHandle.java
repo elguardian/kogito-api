@@ -1,8 +1,9 @@
 /*
- * Copyright 2019 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2010 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -13,22 +14,17 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.rules;
+package org.kie.kogito.timer;
 
-import java.util.List;
-import java.util.Map;
 
-import org.kie.kogito.timer.SessionClock;
+/**
+ * An interface for Job Handles
+ */
+public interface JobHandle {
+    
+    public long getId();
 
-public interface RuleUnitInstance<T extends RuleUnitData> {
-
-    RuleUnit<T> unit();
-
-    int fire();
-
-    List<Map<String, Object>> executeQuery(String query);
-
-    <Q> Q executeQuery(Class<? extends RuleUnitQuery<Q>> query);
-
-    <T extends SessionClock> T getClock();
+    public void setCancel(boolean cancel);
+    
+    public boolean isCancel();
 }
