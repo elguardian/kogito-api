@@ -14,9 +14,21 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.rules;
+package org.kie.kogito.internal.process.event;
 
-public interface RuleUnitData {
+import java.util.Collections;
+import java.util.Set;
 
+import org.kie.api.runtime.process.EventListener;
+import org.kie.kogito.process.EventDescription;
 
+public interface KogitoEventListener extends EventListener {
+
+    /**
+     * Returns unique set of event descriptions that this event listener is interested in.
+     * @return returns set of event definitions awaiting or empty set
+     */
+    default Set<EventDescription<?>> getEventDescriptions() {
+        return Collections.emptySet();
+    }
 }

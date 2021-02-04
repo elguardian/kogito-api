@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.rules;
+package org.kie.kogito.internal.process.event;
 
-public interface RuleUnitData {
+import org.kie.api.event.process.DefaultProcessEventListener;
 
-
+public class DefaultKogitoProcessEventListener extends DefaultProcessEventListener implements KogitoProcessEventListener {
 }

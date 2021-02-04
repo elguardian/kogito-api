@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.rules;
+package org.kie.kogito.internal.process.runtime;
 
-public interface RuleUnitData {
+import org.kie.api.definition.process.Node;
+import org.kie.api.definition.process.NodeContainer;
 
+public interface KogitoNode extends Node {
 
+    NodeContainer getParentContainer();
 }

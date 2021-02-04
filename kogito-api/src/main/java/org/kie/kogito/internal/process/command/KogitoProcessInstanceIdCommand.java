@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.rules;
+package org.kie.kogito.internal.process.command;
 
-public interface RuleUnitData {
+public interface KogitoProcessInstanceIdCommand {
 
+    void setProcessInstanceId(String procInstId);
+
+    String getProcessInstanceId();
 
 }

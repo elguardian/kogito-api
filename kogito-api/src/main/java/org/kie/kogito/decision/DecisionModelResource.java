@@ -14,9 +14,19 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.rules;
+package org.kie.kogito.decision;
 
-public interface RuleUnitData {
+import java.util.function.Supplier;
 
+import org.kie.api.management.GAV;
 
+public interface DecisionModelResource extends Supplier<String> {
+
+    GAV getGav();
+
+    String getNamespace();
+
+    String getModelName();
+
+    DecisionModelType getModelType();
 }

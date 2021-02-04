@@ -14,9 +14,18 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.rules;
+package org.kie.kogito.internal.process.runtime;
 
-public interface RuleUnitData {
+import org.kie.api.runtime.process.NodeInstanceContainer;
 
+public interface KogitoNodeInstanceContainer extends NodeInstanceContainer {
 
+    /**
+     * Returns the node instance with the given id, or <code>null</code>
+     * if the node instance cannot be found.
+     *
+     * @param nodeInstanceId
+     * @return the node instance with the given id
+     */
+    KogitoNodeInstance getNodeInstance(String nodeInstanceId);
 }

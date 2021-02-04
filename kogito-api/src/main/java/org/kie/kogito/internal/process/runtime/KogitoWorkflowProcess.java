@@ -14,9 +14,19 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.rules;
+package org.kie.kogito.internal.process.runtime;
 
-public interface RuleUnitData {
+import java.util.List;
 
+import org.kie.api.definition.process.Node;
+import org.kie.api.definition.process.WorkflowProcess;
 
+public interface KogitoWorkflowProcess extends WorkflowProcess {
+    String PUBLIC_VISIBILITY = "Public";
+    String PRIVATE_VISIBILITY = "Private";
+    String NONE_VISIBILITY = "None";
+
+    String getVisibility();
+
+    List<Node> getNodesRecursively();
 }

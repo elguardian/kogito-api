@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package org.kie.kogito.rules;
+package org.kie.kogito.decision;
 
-public interface RuleUnitData {
+import java.util.List;
+import java.util.function.Supplier;
 
+public interface DecisionModelResourcesProvider extends Supplier<List<DecisionModelResource>> {
 
 }
