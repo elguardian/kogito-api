@@ -15,26 +15,41 @@
  */
 package org.kie.kogito.internal.process.event;
 
-import org.kie.api.event.process.ProcessEventListener;
+import java.util.Map;
 
-public interface KogitoProcessEventListener extends ProcessEventListener {
+import org.kie.api.event.process.ProcessEvent;
+import org.kie.kogito.process.workitem.HumanTaskWorkItem;
 
-    /**
-     * This listener method is invoked right before a work item transition.
-     * 
-     * @param event
-     */
-    default void beforeWorkItemTransition(ProcessWorkItemTransitionEvent event) {
-    };
+/**
+ * An event when a dealine for task has expired
+ */
+public interface HumanTaskDeadlineEvent
+        extends
+        ProcessEvent {
 
-    /**
-     * This listener method is invoked right after a work item transition.
-     * 
-     * @param event
-     */
-    default void afterWorkItemTransition(ProcessWorkItemTransitionEvent event) {
+    enum DeadlineType {
+        Started,
+        Completed
     }
 
-    default void onHumanTaskDeadline(HumanTaskDeadlineEvent event) {
-    }
+    /**
+     * Returns work item which timeout expires
+     * 
+     * @return work item
+     */
+    HumanTaskWorkItem getWorkItem();
+
+    /**
+     * Returns notification data
+     * 
+     * @return key-value pair list
+     */
+    Map<String, Object> getNotification();
+
+    /**
+     * Returns dealine type
+     * 
+     * @return not started or not completed
+     */
+    DeadlineType getType();
 }
