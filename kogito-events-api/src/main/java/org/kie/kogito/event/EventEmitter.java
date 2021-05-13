@@ -13,13 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.services.event;
+package org.kie.kogito.event;
 
 import java.util.Optional;
+import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 
-public interface EventMarshaller {
-
-    <T, P extends AbstractProcessDataEvent<T>> String marshall(T dataEvent, Function<T, P> cloudFunction,
-            Optional<Boolean> isCloudEvent);
+/**
+ * Generic emitter for events.
+ *
+ * Implementations provide their specific (usually injectable) behavior.
+ *
+ */
+public interface EventEmitter {
+    /**
+     * @param e object to emit
+     * @param type type of object to emit
+     * @param optional process decorator
+     */
+    <T> CompletionStage<Void> emit(T e,
+            String type,
+            Optional<Function<T, Object>> processDecorator);
 }

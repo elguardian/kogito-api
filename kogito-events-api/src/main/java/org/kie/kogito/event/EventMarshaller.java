@@ -13,13 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.services.event;
+package org.kie.kogito.event;
 
-import java.util.function.Function;
+public interface EventMarshaller {
 
-import org.kie.kogito.Model;
-
-public interface EventConsumerFactory {
-
-    <M extends Model, D> EventConsumer<M> get(Function<D, M> function, boolean cloudEvents);
+    <T> String marshall(T dataEvent);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2021 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.services.event;
+package org.kie.kogito.event;
 
-import java.util.function.Function;
-
-import org.kie.kogito.Model;
-
-public interface EventConsumerFactory {
-
-    <M extends Model, D> EventConsumer<M> get(Function<D, M> function, boolean cloudEvents);
+/**
+ * Indicates that a class is providing a input trigger.
+ * This is used to resolve all classes providing input triggers for a particular process
+ */
+public interface InputTriggerAware {
+    String getInputTrigger();
 }
