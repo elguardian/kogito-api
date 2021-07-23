@@ -15,10 +15,17 @@
  */
 package org.kie.kogito.event;
 
-/**
- * Indicates that a class is providing a input trigger.
- * This is used to resolve all classes providing input triggers for a particular process
- */
-public interface InputTriggerAware {
-    String getInputTrigger();
+import java.io.IOException;
+
+public interface EventConverter<S> {
+
+    /**
+     * Converts input object to output object
+     * 
+     * @param input value to be converted
+     * @param outputClass type of the value getting generated
+     * @return ouput object
+     * @throws IOException if conversion cannot be performed. IMPORTANT!!!! any other exception will be considered unexpected, so this implementation should not willingly throw any runtime exception
+     */
+    <T> T apply(S input, Class<T> outputClass) throws IOException;
 }

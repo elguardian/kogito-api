@@ -15,10 +15,11 @@
  */
 package org.kie.kogito.event;
 
-/**
- * Indicates that a class is providing an output trigger.
- * This is used to resolve all classes providing output triggers for a particular process
- */
-public interface OutputTriggerAware {
-    String getOutputTrigger();
+import java.util.Set;
+
+public interface ChannelResolver {
+
+    Set<String> getOutputChannels();
+
+    Set<String> getInputChannels();
 }
