@@ -17,7 +17,7 @@ package org.kie.kogito.event;
 
 import java.io.IOException;
 
-public interface EventConverter<S> {
+public interface EventUnmarshaller<S> {
 
     /**
      * Converts input object to output object
@@ -27,5 +27,5 @@ public interface EventConverter<S> {
      * @return ouput object
      * @throws IOException if conversion cannot be performed. IMPORTANT!!!! any other exception will be considered unexpected, so this implementation should not willingly throw any runtime exception
      */
-    <T> T apply(S input, Class<T> outputClass) throws IOException;
+    <T> T unmarshall(S input, Class<T> outputClass) throws IOException;
 }
