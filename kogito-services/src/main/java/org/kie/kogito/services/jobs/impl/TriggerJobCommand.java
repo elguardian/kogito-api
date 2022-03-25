@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.services.jobs.impl;
+package org.kie.kogito.services.jobs.impl;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -42,7 +42,7 @@ public class TriggerJobCommand {
         this.uom = uom;
     }
 
-    public Boolean execute() {
+    public boolean execute() {
         return UnitOfWorkExecutor.executeInUnitOfWork(uom, () -> {
             Optional<? extends ProcessInstance<?>> processInstanceFound = process.instances().findById(processInstanceId);
             return processInstanceFound.map(processInstance -> {

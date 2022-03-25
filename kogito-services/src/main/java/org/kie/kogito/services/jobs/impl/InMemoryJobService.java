@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.services.jobs.impl;
+package org.kie.kogito.services.jobs.impl;
 
 import java.time.Duration;
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -48,7 +47,7 @@ public class InMemoryJobService implements JobsService, AutoCloseable {
     protected ConcurrentHashMap<String, ScheduledFuture<?>> scheduledJobs = new ConcurrentHashMap<>();
     private final Processes processes;
 
-    private static ConcurrentHashMap<Processes, InMemoryJobService> INSTANCE = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<Processes, InMemoryJobService> INSTANCE = new ConcurrentHashMap<>();
 
     protected InMemoryJobService(Processes processes, UnitOfWorkManager unitOfWorkManager) {
         this.processes = processes;
@@ -59,7 +58,7 @@ public class InMemoryJobService implements JobsService, AutoCloseable {
     public static InMemoryJobService get(final Processes processes, final UnitOfWorkManager unitOfWorkManager) {
         Objects.requireNonNull(processes);
         Objects.requireNonNull(unitOfWorkManager);
-        return INSTANCE.computeIfAbsent(processes, (k) -> new InMemoryJobService(processes, unitOfWorkManager));
+        return INSTANCE.computeIfAbsent(processes, k -> new InMemoryJobService(processes, unitOfWorkManager));
     }
 
     @Override
@@ -108,18 +107,6 @@ public class InMemoryJobService implements JobsService, AutoCloseable {
         return false;
     }
 
-    @Override
-    public ZonedDateTime getScheduledTime(String id) {
-        if (scheduledJobs.containsKey(id)) {
-            ScheduledFuture<?> scheduled = scheduledJobs.get(id);
-            long remainingTime = scheduled.getDelay(TimeUnit.MILLISECONDS);
-            if (remainingTime > 0) {
-                return ZonedDateTime.from(Instant.ofEpochMilli(System.currentTimeMillis() + remainingTime));
-            }
-        }
-        return null;
-    }
-
     protected long calculateDelay(JobDescription description) {
         long delay = Duration.between(ZonedDateTime.now(), description.expirationTime().get()).toMillis();
         if (delay <= 0) {
@@ -158,7 +145,7 @@ public class InMemoryJobService implements JobsService, AutoCloseable {
                 LOGGER.info("Job {} started", id);
                 Process<? extends Model> process = processes.processById(processId);
                 limit--;
-                Boolean executed = new TriggerJobCommand(processInstanceId, id, limit, process, unitOfWorkManager).execute();
+                boolean executed = new TriggerJobCommand(processInstanceId, id, limit, process, unitOfWorkManager).execute();
                 if (limit == 0 || !executed) {
                     cancelJob(id, false);
                 }
