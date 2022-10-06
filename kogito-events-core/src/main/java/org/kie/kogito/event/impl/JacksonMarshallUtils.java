@@ -13,14 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.event;
+package org.kie.kogito.event.impl;
 
-import java.util.concurrent.CompletionStage;
+import org.kie.kogito.event.Converter;
 
-import org.kie.kogito.Model;
-import org.kie.kogito.process.ProcessInstance;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-public interface EventDispatcher<M extends Model, D> {
+import io.cloudevents.CloudEventData;
 
-    CompletionStage<ProcessInstance<M>> dispatch(String trigger, DataEvent<D> event);
+class JacksonMarshallUtils {
+
+    static <O> Converter<CloudEventData, O> getDataConverter(Class<O> targetClass, ObjectMapper objectMapper) {
+        return JsonNode.class.isAssignableFrom(targetClass) ? (Converter<CloudEventData, O>) new JsonNodeCloudEventDataConverter(objectMapper)
+                : new POJOCloudEventDataConverter<>(objectMapper, targetClass);
+    }
+
+    private JacksonMarshallUtils() {
+    }
 }

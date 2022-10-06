@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Red Hat, Inc. and/or its affiliates.
+ * Copyright 2020 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.correlation;
+package org.kie.kogito.event.impl;
 
-public interface CorrelationEncoder {
+import java.util.Collections;
+import java.util.List;
 
-    String encode(Correlation<?> correlation);
+import org.kie.kogito.event.Topic;
+import org.kie.kogito.event.TopicDiscovery;
+import org.kie.kogito.event.cloudevents.CloudEventMeta;
+
+/**
+ * Default {@link TopicDiscovery} implementation for services with no eventing requirement
+ */
+public class NoOpTopicDiscovery implements TopicDiscovery {
+
+    @Override
+    public List<Topic> getTopics(List<CloudEventMeta> events) {
+        return Collections.emptyList();
+    }
 }

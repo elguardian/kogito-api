@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.correlation;
+package org.kie.kogito.event;
 
-public interface CorrelationEncoder {
+import org.kie.kogito.internal.process.runtime.KogitoProcessInstance;
 
-    String encode(Correlation<?> correlation);
+import io.cloudevents.CloudEvent;
+
+public interface CloudEventFactory {
+    CloudEvent build(Object data, String trigger, KogitoProcessInstance pi);
 }

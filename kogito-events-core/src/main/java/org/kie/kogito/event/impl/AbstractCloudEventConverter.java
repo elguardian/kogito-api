@@ -13,9 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.correlation;
+package org.kie.kogito.event.impl;
 
-public interface CorrelationEncoder {
+import java.io.IOException;
 
-    String encode(Correlation<?> correlation);
+import org.kie.kogito.event.Converter;
+
+import io.cloudevents.CloudEvent;
+
+public abstract class AbstractCloudEventConverter<I> implements Converter<I, CloudEvent> {
+    @Override
+    public CloudEvent convert(I value) throws IOException {
+        if (value == null) {
+            return null;
+        } else if (value instanceof CloudEvent) {
+            return (CloudEvent) value;
+        } else {
+            return toValue(value);
+        }
+    }
+
+    protected abstract CloudEvent toValue(I value) throws IOException;
 }

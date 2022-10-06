@@ -13,9 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.correlation;
+package org.kie.kogito.event.impl;
 
-public interface CorrelationEncoder {
+import java.io.IOException;
 
-    String encode(Correlation<?> correlation);
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.cloudevents.CloudEvent;
+
+public class Object2JsonCloudEventConverter extends AbstractCloudEventConverter<Object> {
+
+    private ObjectMapper objectMapper;
+
+    public Object2JsonCloudEventConverter(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
+    @Override
+    protected CloudEvent toValue(Object value) throws IOException {
+        return objectMapper.readValue(value.toString(), CloudEvent.class);
+    }
+
 }

@@ -13,9 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.correlation;
+package org.kie.kogito.event;
 
-public interface CorrelationEncoder {
+import org.kie.kogito.event.impl.CloudEventWrapDataEvent;
+import org.kie.kogito.event.process.ProcessDataEvent;
 
-    String encode(Correlation<?> correlation);
+import io.cloudevents.CloudEvent;
+import io.cloudevents.CloudEventData;
+
+public class DataEventFactory {
+
+    public static <T> DataEvent<T> from(T event) {
+        return new ProcessDataEvent<>(event);
+    }
+
+    public static <T> DataEvent<T> from(CloudEvent event, Converter<CloudEventData, T> unmarshaller) {
+        return new CloudEventWrapDataEvent<>(event, unmarshaller);
+    }
+
+    private DataEventFactory() {
+    }
 }
