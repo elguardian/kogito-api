@@ -13,12 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kie.kogito.event;
+package org.kie.kogito.event.impl;
 
-import org.kie.kogito.internal.process.runtime.KogitoProcessInstance;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.cloudevents.CloudEvent;
+public class JacksonCloudEventDataFactory<T> extends AbstractCloudEventDataFactory<T> {
 
-public interface CloudEventFactory {
-    CloudEvent build(Object data, String trigger, KogitoProcessInstance pi);
+    private final ObjectMapper mapper;
+
+    public JacksonCloudEventDataFactory(ObjectMapper objectMapper) {
+        this.mapper = objectMapper;
+    }
+
+    @Override
+    protected byte[] toBytes(T event) throws JsonProcessingException {
+        return mapper.writeValueAsBytes(event);
+    }
 }
